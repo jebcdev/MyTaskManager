@@ -315,7 +315,17 @@ return [
             'route' => 'categories.index',
             'icon' => 'fas fa-tags',
         ],
-        
+        [
+            'text' => 'Gestión de Tareas',
+            'route' => 'tasks.index',
+            'icon' => 'fas fa-tasks',
+        ],
+        [
+            'text' => 'Gestión de Notas',
+            'route' => 'notes.index',
+            'icon' => 'far fa-sticky-note',
+        ],
+
     ],
 
     /*

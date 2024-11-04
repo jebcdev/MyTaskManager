@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -66,9 +67,9 @@ class Task extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function notes()
+    public function notes():HasMany
     {
-        return $this->hasMany(\App\Models\Note::class, 'id', 'task_id');
+        return $this->hasMany(Note::class);
     }
     
 }

@@ -1,28 +1,30 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Notes
-@endsection
+@section('title')
+    {{ config('app.name') }}
+@stop
+
+@section('content_header')
+    <div class="row align-items-center">
+        <div class="col-6 d-flex">
+            <h1 class="me-auto">
+                {{ __('Notes') }}
+            </h1>
+        </div>
+        <div class="col-6 d-flex justify-content-end">
+            <a href="{{ route('notes.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+                {{ __('Create New') }}
+            </a>
+        </div>
+    </div>
+@stop
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            <span id="card_title">
-                                {{ __('Notes') }}
-                            </span>
-
-                             <div class="float-right">
-                                <a href="{{ route('notes.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
-                              </div>
-                        </div>
-                    </div>
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success m-4">
                             <p>{{ $message }}</p>
@@ -34,10 +36,10 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
+                                        <th>ID</th>
                                         
-									<th >Task Id</th>
-									<th >Content</th>
+									<th >{{__('Task')}}</th>
+									<th >{{__('Content')}}</th>
 
                                         <th></th>
                                     </tr>
@@ -45,9 +47,9 @@
                                 <tbody>
                                     @foreach ($notes as $note)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $note->id}}</td>
                                             
-										<td >{{ $note->task_id }}</td>
+										<td >{{ $note->task->name }}</td>
 										<td >{{ $note->content }}</td>
 
                                             <td>
@@ -70,4 +72,12 @@
             </div>
         </div>
     </div>
-@endsection
+    @stop
+
+    @section('css')
+        {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    @stop
+    
+    @section('js')
+        {{-- <script> console.log('Hi!'); </script> --}}
+    @stop

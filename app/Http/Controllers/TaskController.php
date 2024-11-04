@@ -6,17 +6,31 @@ use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
+use App\Models\Category;
+use App\Models\Status;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class TaskController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): View
     {
-        $tasks = Task::paginate();
+        $tasks = Task::query()
+            ->where('user_id', Auth::id())
+            ->with([
+                'status',
+                'category',
+                'user',
+                'notes',
+            ])
+            ->latest()
+            ->paginate();
 
         return view('task.index', compact('tasks'))
             ->with('i', ($request->input('page', 1) - 1) * $tasks->perPage());
@@ -28,8 +42,17 @@ class TaskController extends Controller
     public function create(): View
     {
         $task = new Task();
+        $task->load([
+            'status',
+            'category',
+            'user',
+            'notes',
+        ]);
 
-        return view('task.create', compact('task'));
+        $categories = Category::all();
+        $statuses = Status::all();
+
+        return view('task.create', compact('task', 'categories', 'statuses'));
     }
 
     /**
@@ -40,15 +63,23 @@ class TaskController extends Controller
         Task::create($request->validated());
 
         return Redirect::route('tasks.index')
-            ->with('success', 'Task created successfully.');
+            ->with('success', __('Task created successfully'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id): View
+    public function show(Task $task)/* : View */
     {
-        $task = Task::find($id);
+
+        $task->load([
+            'status',
+            'category',
+            'user',
+            'notes',
+        ]);
+
+
 
         return view('task.show', compact('task'));
     }
@@ -56,11 +87,21 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id): View
+    public function edit(Task $task): View
     {
-        $task = Task::find($id);
 
-        return view('task.edit', compact('task'));
+
+        $task->load([
+            'status',
+            'category',
+            'user',
+            'notes',
+        ]);
+
+        $categories = Category::all();
+        $statuses = Status::all();
+
+        return view('task.edit', compact('task', 'categories', 'statuses'));
     }
 
     /**
@@ -71,7 +112,7 @@ class TaskController extends Controller
         $task->update($request->validated());
 
         return Redirect::route('tasks.index')
-            ->with('success', 'Task updated successfully');
+            ->with('success', __('Task updated successfully'));
     }
 
     public function destroy($id): RedirectResponse
@@ -79,6 +120,6 @@ class TaskController extends Controller
         Task::find($id)->delete();
 
         return Redirect::route('tasks.index')
-            ->with('success', 'Task deleted successfully');
+            ->with('success', __('Task deleted successfully'));
     }
 }

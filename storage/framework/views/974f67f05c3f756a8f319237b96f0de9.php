@@ -7,11 +7,11 @@
 <div class="row align-items-center">
     <div class="col-6 d-flex">
         <h1 class="me-auto">
-            <span class="card-title"><?php echo e(__('Update')); ?> <?php echo e(__('Status')); ?></span>
+            <span class="card-title"><?php echo e(__('Update')); ?> <?php echo e(__('Note')); ?></span>
         </h1>
     </div>
     <div class="col-6 d-flex justify-content-end">
-        <a href="<?php echo e(route('statuses.index')); ?>" class="btn btn-sm btn-primary">
+        <a href="<?php echo e(route('notes.index')); ?>" class="btn btn-sm btn-primary">
             <?php echo e(__('Back')); ?>
 
         </a>
@@ -27,12 +27,12 @@
                 <div class="card card-default">
 
                     <div class="card-body bg-white">
-                        <form method="POST" action="<?php echo e(route('statuses.update', $status->id)); ?>"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="<?php echo e(route('notes.update', $note->id)); ?>"  role="form" enctype="multipart/form-data">
                             <?php echo e(method_field('PATCH')); ?>
 
                             <?php echo csrf_field(); ?>
 
-                            <?php echo $__env->make('status.form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            <?php echo $__env->make('note.form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                         </form>
                     </div>
@@ -49,4 +49,4 @@
     <?php $__env->startSection('js'); ?>
         
     <?php $__env->stopSection(); ?>
-<?php echo $__env->make('adminlte::page', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\MyTaskManager\resources\views/status/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('adminlte::page', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\MyTaskManager\resources\views/note/edit.blade.php ENDPATH**/ ?>

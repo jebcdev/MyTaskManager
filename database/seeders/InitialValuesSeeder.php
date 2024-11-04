@@ -72,15 +72,19 @@ class InitialValuesSeeder extends Seeder
     public function TaskSeeder(): void
     {
         try {
-            for ($i = 1; $i <= 10; $i++) {
-                Task::create([
-                    'user_id' => User::inRandomOrder()->first()->id,
-                    'category_id' => Category::inRandomOrder()->first()->id,
-                    'status_id' => Status::inRandomOrder()->first()->id,
-                    'name' => 'Tarea ' . $i,
-                    'description' => 'Descripción de la tarea ' . $i
-                ]);
+
+            foreach (User::all() as $user) {
+                for ($i = 1; $i <= 10; $i++) {
+                    Task::create([
+                        'user_id' => $user->id,
+                        'category_id' => Category::inRandomOrder()->first()->id,
+                        'status_id' => Status::inRandomOrder()->first()->id,
+                        'name' => 'Tarea 00' . $i . ' de ' . $user->name,
+                        'description' => 'Descripción de la tarea ' . $i
+                    ]);
+                }
             }
+        
         } catch (\Throwable $th) {
             throw $th;
         }

@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
 	<?php echo e(config('app.name')); ?>
 
@@ -15,7 +13,8 @@
     </div>
     <div class="col-6 d-flex justify-content-end">
         <a href="<?php echo e(route('admin.index')); ?>" class="btn btn-sm btn-primary">
-            
+            <?php echo e(__('Dashboard')); ?>
+
         </a>
     </div>
 </div>

@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\_SiteController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', _SiteController::class)->name('index');
@@ -14,8 +16,21 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+
+    /* Proteger estas rutas para los admins */
+
     Route::resource('/statuses', StatusController::class)->names('statuses');
+
     Route::resource('/categories', CategoryController::class)->names('categories');
+    /* Proteger estas rutas para los admins */
+
+    /* Rutas de las tareas */
+    Route::resource('/tasks', TaskController::class)->names('tasks');
+    /* Rutas de las tareas */
+
+    /* Rutas de las notas */
+    Route::resource('/notes', NoteController::class)->names('notes');
+    /* Rutas de las notas */
 });
 
 

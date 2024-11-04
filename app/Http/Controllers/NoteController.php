@@ -6,6 +6,8 @@ use App\Models\Note;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\NoteRequest;
+use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -16,7 +18,11 @@ class NoteController extends Controller
      */
     public function index(Request $request): View
     {
-        $notes = Note::paginate();
+        $notes = Note::whereHas('task', function ($query) {
+            $query->where('user_id', Auth::id());
+        })
+        ->latest()
+        ->paginate();
 
         return view('note.index', compact('notes'))
             ->with('i', ($request->input('page', 1) - 1) * $notes->perPage());
@@ -29,7 +35,13 @@ class NoteController extends Controller
     {
         $note = new Note();
 
-        return view('note.create', compact('note'));
+        $note->load([
+            'task',
+        ]);
+
+        $tasks=Task::where('user_id', Auth::id())->get();
+
+        return view('note.create', compact('note', 'tasks'));
     }
 
     /**
@@ -40,15 +52,18 @@ class NoteController extends Controller
         Note::create($request->validated());
 
         return Redirect::route('notes.index')
-            ->with('success', 'Note created successfully.');
+            ->with('success', __('Note created successfully'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id): View
+    public function show(Note $note): View
     {
-        $note = Note::find($id);
+
+        $note->load([
+            'task',
+        ]);
 
         return view('note.show', compact('note'));
     }
@@ -56,11 +71,16 @@ class NoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id): View
+    public function edit(Note $note): View
     {
-        $note = Note::find($id);
 
-        return view('note.edit', compact('note'));
+        $note->load([
+            'task',
+        ]);
+
+        $tasks=Task::where('user_id', Auth::id())->get();
+
+        return view('note.edit', compact('note', 'tasks'));
     }
 
     /**
@@ -71,7 +91,7 @@ class NoteController extends Controller
         $note->update($request->validated());
 
         return Redirect::route('notes.index')
-            ->with('success', 'Note updated successfully');
+            ->with('success', __('Note updated successfully'));
     }
 
     public function destroy($id): RedirectResponse
@@ -79,6 +99,6 @@ class NoteController extends Controller
         Note::find($id)->delete();
 
         return Redirect::route('notes.index')
-            ->with('success', 'Note deleted successfully');
+            ->with('success', __('Note deleted successfully'));
     }
 }

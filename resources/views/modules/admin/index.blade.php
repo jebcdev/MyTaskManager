@@ -13,7 +13,7 @@
     </div>
     <div class="col-6 d-flex justify-content-end">
         <a href="{{ route('admin.index') }}" class="btn btn-sm btn-primary">
-            
+            {{__('Dashboard')}}
         </a>
     </div>
 </div>

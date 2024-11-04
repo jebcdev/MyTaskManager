@@ -1,22 +1,30 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    {{ $note->name ?? __('Show') . " " . __('Note') }}
-@endsection
+@section('title')
+    {{ config('app.name') }}
+@stop
+
+@section('content_header')
+    <div class="row align-items-center">
+        <div class="col-6 d-flex">
+            <h1 class="me-auto">
+                <span class="card-title">{{ __('Note Details') }}</span>
+            </h1>
+        </div>
+        <div class="col-6 d-flex justify-content-end">
+            <a href="{{ route('notes.index') }}" class="btn  btn-primary">
+                {{ __('Back') }}
+            </a>
+        </div>
+    </div>
+@stop
 
 @section('content')
     <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
-                        <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Note</span>
-                        </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary btn-sm" href="{{ route('notes.index') }}"> {{ __('Back') }}</a>
-                        </div>
-                    </div>
+
 
                     <div class="card-body bg-white">
                         
@@ -34,4 +42,12 @@
             </div>
         </div>
     </section>
-@endsection
+    @stop
+
+    @section('css')
+        {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    @stop
+    
+    @section('js')
+        {{-- <script> console.log('Hi!'); </script> --}}
+    @stop

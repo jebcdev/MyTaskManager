@@ -277,5 +277,21 @@
     "Category": "Categoría",
     "Category created successfully": "Categoría creada con éxito",
     "Category updated successfully": "Categoría actualizada con éxito",
-    "Category deleted successfully": "Categoría eliminada con éxito"
+    "Category deleted successfully": "Categoría eliminada con éxito",
+
+    "Task": "Tarea",
+    "Tasks": "Tareas",
+    "Select A Category": "Seleccione una Categoría",
+    "Select A Status": "Seleccione un Estado",
+    "Task created successfully": "Tarea creada con éxito",
+    "Task updated successfully": "Tarea actualizada con éxito",
+    "Task deleted successfully": "Tarea eliminada con éxito",
+
+    "Note": "Nota",
+    "Notes": "Notas",
+    "Note Details": "Detalles de la Nota",
+    "Note created successfully": "Nota creada con éxito",
+    "Note updated successfully": "Nota actualizada con éxito",
+    "Note deleted successfully": "Nota eliminada con éxito",
+    "Content": "Contenido"
 }
