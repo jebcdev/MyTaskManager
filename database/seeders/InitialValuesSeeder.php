@@ -13,61 +13,67 @@ use Illuminate\Database\Seeder;
 class InitialValuesSeeder extends Seeder
 {
     public function StatusSeeder(): void
-    {
-        try {
+{
+    try {
+        Status::create([
+            'name' => 'Iniciada',
+            'description' => 'Tarea recién creada',
+            'color' => 'bg-info'
+        ]);
 
-            Status::create([
-                'name' => 'Iniciada',
-                'description' => 'Tarea recien creada'
-            ]);
+        Status::create([
+            'name' => 'En Progreso',
+            'description' => 'Tarea en la cual ya se está trabajando',
+            'color' => 'bg-primary'
+        ]);
 
-            Status::create([
-                'name' => 'En Progreso',
-                'description' => 'Tarea en la cual ya se esta trabajando'
-            ]);
-
-            Status::create([
-                'name' => 'Finalizada',
-                'description' => 'Esta tarea ya acabó'
-            ]);
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+        Status::create([
+            'name' => 'Finalizada',
+            'description' => 'Esta tarea ya acabó',
+            'color' => 'bg-success'
+        ]);
+    } catch (\Throwable $th) {
+        throw $th;
     }
+}
 
-    public function CategorySeeder(): void
-    {
-        try {
-            Category::create([
-                'name' => 'Personal',
-                'description' => 'Tareas de tipo personal'
-            ]);
+public function CategorySeeder(): void
+{
+    try {
+        Category::create([
+            'name' => 'Personal',
+            'description' => 'Tareas de tipo personal',
+            'color' => 'bg-secondary'
+        ]);
 
-            Category::create([
-                'name' => 'Académicas',
-                'description' => 'Tareas de tipo Tareas de tipo académico'
-            ]);
+        Category::create([
+            'name' => 'Académicas',
+            'description' => 'Tareas de tipo académico',
+            'color' => 'bg-info'
+        ]);
 
-            Category::create([
-                'name' => 'Laboral',
-                'description' => 'Tareas de tipo laboral'
-            ]);
+        Category::create([
+            'name' => 'Laboral',
+            'description' => 'Tareas de tipo laboral',
+            'color' => 'bg-primary'
+        ]);
 
-            Category::create([
-                'name' => 'Hogar',
-                'description' => 'Tareas del hogar (Gatos, Compras,etc)'
-            ]);
+        Category::create([
+            'name' => 'Hogar',
+            'description' => 'Tareas del hogar (Gatos, Compras, etc)',
+            'color' => 'bg-warning'
+        ]);
 
-
-
-            Category::create([
-                'name' => 'Médicas',
-                'description' => 'Tareas de lo relacionado con la salud'
-            ]);
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+        Category::create([
+            'name' => 'Médicas',
+            'description' => 'Tareas relacionadas con la salud',
+            'color' => 'bg-danger'
+        ]);
+    } catch (\Throwable $th) {
+        throw $th;
     }
+}
+
 
     public function TaskSeeder(): void
     {

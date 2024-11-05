@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NoteRequest;
 use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
 use App\Models\Category;
+use App\Models\Note;
 use App\Models\Status;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use PhpParser\Node\Stmt\TryCatch;
 
 class TaskController extends Controller
 {
@@ -121,5 +124,33 @@ class TaskController extends Controller
 
         return Redirect::route('tasks.index')
             ->with('success', __('Task deleted successfully'));
+    }
+
+    public function addNote(Task $task)
+    {
+        try {
+            $note = new Note();
+
+            $note->load([
+                'task',
+            ]);
+
+            return view(
+                'task.addnote.create',
+                [
+                    'task' => $task,
+                    'note' => $note
+                ]
+            );
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function storeNote(NoteRequest $request): RedirectResponse
+    {
+        Note::create($request->validated());
+
+        return to_route('tasks.show', $request->task_id)->with('success', __('Note created successfully'));
     }
 }

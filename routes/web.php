@@ -11,11 +11,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', _SiteController::class)->name('index');
 
 
-Route::middleware('auth')->prefix('admin')->group(function () {
-    Route::get('/', [_SiteController::class, 'admin'])->name('admin.index');
-});
 
 Route::middleware('auth')->group(function () {
+    
+    Route::get('/admin', [_SiteController::class, 'admin'])->name('admin.index');
 
     /* Proteger estas rutas para los admins */
 
@@ -26,6 +25,9 @@ Route::middleware('auth')->group(function () {
 
     /* Rutas de las tareas */
     Route::resource('/tasks', TaskController::class)->names('tasks');
+    Route::get('/task-add-note/{task}', [TaskController::class,'addNote'])->name('tasks.addNote');
+    Route::get('/task-add-note', [TaskController::class,'storeNote'])->name('tasks.storeNote');
+    
     /* Rutas de las tareas */
 
     /* Rutas de las notas */

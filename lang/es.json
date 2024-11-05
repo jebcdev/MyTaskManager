@@ -293,5 +293,13 @@
     "Note created successfully": "Nota creada con éxito",
     "Note updated successfully": "Nota actualizada con éxito",
     "Note deleted successfully": "Nota eliminada con éxito",
-    "Content": "Contenido"
+    "Content": "Contenido",
+
+    "Nothing To Show": "Nada Que Mostrar",
+    "Analytics": "Analíticas",
+    "Tasks Analytics": "Analíticas de Tareas",
+    "By Categories": "Por Categorías",
+    "By Statuses": "Por Estados",
+
+    "Add Notes": "Agregar Notas"
 }

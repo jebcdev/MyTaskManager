@@ -50,6 +50,11 @@
                         </div>
 
                     </div>
+
+                    <div class="m-1 p-1">
+                        <a class="btn btn-primary" href="{{ route('tasks.addNote',$task) }}">
+                            {{__('Add Notes')}}</a>
+                    </div>
                 </div>
             </div>
         </div>

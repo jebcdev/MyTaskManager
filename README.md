@@ -201,3 +201,67 @@ Para agilizar la creación de CRUDs:
 composer require ibex/crud-generator --dev
 php artisan vendor:publish --tag=crud
 ```
+<!-- Modify -->
+Aquí tienes el fragmento formateado para el README:
+
+---
+
+### Uso de DataTables en la plantilla AdminLTE
+
+Para integrar DataTables en el proyecto usando AdminLTE, sigue estos pasos:
+
+1. **Instala DataTables**  
+   Consulta la documentación oficial de DataTables para más información: [DataTables Documentation](https://datatables.net/)
+
+2. **Agregar los Estilos y Scripts en la Vista**
+
+   Añade el siguiente código en la sección `@section('css')` y `@section('js')` para incluir los archivos necesarios de DataTables y configurarlo:
+
+   ```blade
+   @section('css')
+       <link rel="stylesheet" href="{{ asset('assets/css/datatables.min.css') }}">
+   @stop
+
+   @section('js')
+       <script src="{{ asset('assets/js/jq.min.js') }}"></script>
+       <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
+       <script>
+           $(document).ready(function() {
+               $('#table').DataTable({
+                   language: {
+                       "decimal": "",
+                       "emptyTable": "No hay información",
+                       "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                       "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+                       "infoFiltered": "(Filtrado de _MAX_ total de entradas)",
+                       "infoPostFix": "",
+                       "thousands": ",",
+                       "lengthMenu": "Mostrar _MENU_ Entradas",
+                       "loadingRecords": "Cargando...",
+                       "processing": "Procesando...",
+                       "search": "Buscar:",
+                       "zeroRecords": "Sin resultados encontrados",
+                       "paginate": {
+                           "first": "Primero",
+                           "last": "Último",
+                           "next": "Siguiente",
+                           "previous": "Anterior"
+                       }
+                   },
+               });
+           });
+       </script>
+   @stop
+   ```
+
+3. **Uso en la Tabla HTML**
+
+   Asegúrate de que tu tabla tiene el identificador `table` para que DataTables pueda inicializarla adecuadamente:
+
+   ```html
+   <table id="table" class="table table-bordered table-striped">
+       <!-- Encabezado y cuerpo de la tabla -->
+   </table>
+   ```
+
+Con esta configuración, DataTables mostrará la tabla con los controles de paginación, búsqueda, y filtrado, además de los textos personalizados en español.

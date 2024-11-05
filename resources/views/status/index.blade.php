@@ -34,7 +34,7 @@
 
                     <div class="card-body bg-white">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover" id="table">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
@@ -76,9 +76,36 @@
     @stop
 
     @section('css')
-        {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
-    @stop
-    
-    @section('js')
-        {{-- <script> console.log('Hi!'); </script> --}}
-    @stop
+    <link rel="stylesheet" href="{{ asset('assets/css/datatables.min.css') }}">
+@stop
+
+@section('js')
+    <script src="{{ asset('assets/js/jq.min.js') }}"></script>
+    <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#table').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+            });
+        });
+    </script>
+@stop
